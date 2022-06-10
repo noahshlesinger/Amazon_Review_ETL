@@ -1,1 +1,8 @@
-# Amazon_Review_ETL
+# Amazon Review ETL
+## This repo is an analysis of amazon review in which google colab is utilized to perform an ETL process. Following this, the data is loaded into a PGAdmin database where it can be further analysed.
+
+### Step 1: Extract, Transform, and Load into a SQL database
+
+Once all the dependencies are loaded and a spark session has been initialized, a postgres driver is downloaded to connect to the sql database from google colab. From there, the data is extracted from the internet, using S3, and read in as a dataframe type file. Now that the data is read in correctly, the process of transforming the data begins int order to have the proper format for postgres. This entails splitting the data into several seperate tables for analysis purposes. The first is a customers dataframe in which the customer id's are grouped together. The next table is a products table that only includes the product id and product title. However, there are multiple products that are listed several times. The .drop_duplicates() function is used to have only 1 of each product listed. The third dataframe created is focused on the reviews of the products. Becasue there is a date type column, the pyspark sql function "to_date" is imported to convert the date to yyyy-MM-dd, for the loading process to go smoothly.
+Lastly, there is a vine dataframe that focuses on star ratings, helpful votes, total votes, vine and if it's a verified purchase. 
+Now that the dataframes have been made and cleaned, the getpass package is imported in order to use the driver and take the data from google colab to the database in pdagmin.
